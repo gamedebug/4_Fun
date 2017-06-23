@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 
 count = 0
-n = input("Enter a number: ")
 while True:
-    if n%2 == 0:
-        n = n/2
+    n = raw_input("Enter a number: ")
+    if n.isdigit():
+        break
     else:
-        n = n*3+1
+        print "Fuck you!!! Enter again!!!"
+while True:
+    if int(n)%2 == 0:
+        n = int(n)/2
+    else:
+        n = int(n)*3+1
     count = count + 1
-    if n == 1:
+    if int(n) == 1:
         break
 print n
 print count
