@@ -7,7 +7,7 @@ while True:
     if n.isdigit():
         break
     else:
-        print "Fuck you!!! Enter again!!!"
+        print "INPUT ERROR!!!"
 
 while True:
     if int(n)%2 == 0:
