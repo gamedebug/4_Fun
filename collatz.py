@@ -17,6 +17,8 @@ while True:
                 break
     elif n == "exit":
         break
+    elif n == "quit":
+        break
     else:
         print "输入错误，请重新输入!!!"
 
