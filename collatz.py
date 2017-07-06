@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 count = 0
-
+# 运算开始
 while True:
     n = raw_input("请输入一个数字: ")
     if n.isdigit():
