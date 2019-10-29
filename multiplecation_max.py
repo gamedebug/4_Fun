@@ -6,18 +6,19 @@ import numpy as np
 list = []
 n = 1
 while True:
-    list_len = input("请设置数组长度：")
+    list_len = input("请设置数组长度： ")
     try:
         while n <= int(list_len):
-            number = input("请输入一个数字: ")
+            print("请输入第" + str(n) + "个元素： ", end="")
+            number = input()
             try:
                 list.append(eval(number))
                 n += 1
             except Exception:
-                print("输入错误！")
+                print("元素类型错误！")
             print(list)
     except Exception:
-        print("输入错误！")
+        print("长度数据错误！")
     flag = input("再玩一次？(yes|no)")
     if flag == "yes":
         continue
