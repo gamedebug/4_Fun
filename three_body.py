@@ -45,7 +45,7 @@ def Force(M1,R1,M2,R2):
     return unit_vector(R1, R2) * force_magnitude(M1, R1, M2, R2)
 
 
-#将食量R以速度v改变dt时间
+#将矢量R以速度v改变dt时间
 def move(R,v): 
     R+=dt*v
     return
