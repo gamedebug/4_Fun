@@ -3,7 +3,7 @@
 
 count = 0
 while True:
-    n = raw_input("请输入一个数字: ")
+    n = input("请输入一个数字: ")
     if n.isdigit():
         while True:
             if int(n) % 2 == 0:
@@ -19,5 +19,5 @@ while True:
     elif n == "quit":
         break
     else:
-        print "输入错误，请重新输入!!!"
+        print ("输入错误，请重新输入!!!")
 
