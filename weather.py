@@ -8,7 +8,8 @@ def get_weather(location):
     data = response.json()
 
     # 获取当前天气信息
-    current_weather = data["current"]["weather"][0]["description"]
+    #current_weather = data["current"]["weather"][0]["description"]
+    current_weather = data["weather"][0]["description"]
     temperature = data["current"]["temp"]
     temperature = round(temperature - 273.15, 2)
 
