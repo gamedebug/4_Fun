@@ -1,8 +1,9 @@
 import requests
 import wx
 
-def get_weather(lat, lon):
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
+def get_weather(location):
+    #url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
+    url = f"http://api.openweathermap.org/data/2.5/forecast?q={location}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
     response = requests.get(url)
     data = response.json()
 
@@ -20,15 +21,20 @@ class WeatherFrame(wx.Frame):
         panel = wx.Panel(self)
         vbox = wx.BoxSizer(wx.VERTICAL)
 
-        lat_label = wx.StaticText(panel, label="纬度:")
-        self.lat_entry = wx.TextCtrl(panel)
-        vbox.Add(lat_label, flag=wx.ALL, border=10)
-        vbox.Add(self.lat_entry, flag=wx.EXPAND|wx.ALL, border=10)
+        location_label = wx.StaticText(panel, label="城市:")
+        self.location_entry = wx.TextCtrl(panel)
+        vbox.Add(location_label, flag=wx.ALL, border=10)
+        vbox.Add(self.location_entry, flag=wx.EXPAND|wx.ALL, border=10)
+        
+        #lat_label = wx.StaticText(panel, label="纬度:")
+        #self.lat_entry = wx.TextCtrl(panel)
+        #vbox.Add(lat_label, flag=wx.ALL, border=10)
+        #vbox.Add(self.lat_entry, flag=wx.EXPAND|wx.ALL, border=10)
 
-        lon_label = wx.StaticText(panel, label="经度:")
-        self.lon_entry = wx.TextCtrl(panel)
-        vbox.Add(lon_label, flag=wx.ALL, border=10)
-        vbox.Add(self.lon_entry, flag=wx.EXPAND|wx.ALL, border=10)
+        #lon_label = wx.StaticText(panel, label="经度:")
+        #self.lon_entry = wx.TextCtrl(panel)
+        #vbox.Add(lon_label, flag=wx.ALL, border=10)
+        #vbox.Add(self.lon_entry, flag=wx.EXPAND|wx.ALL, border=10)
 
         submit_button = wx.Button(panel, label="显示天气")
         submit_button.Bind(wx.EVT_BUTTON, self.on_submit)
@@ -40,12 +46,15 @@ class WeatherFrame(wx.Frame):
         panel.SetSizer(vbox)
 
     def on_submit(self, event):
+        # 从输入框中获取城市名称
+        location = self.location_entry.GetValue()
         # 从输入框中获取纬度和经度
-        lat = self.lat_entry.GetValue()
-        lon = self.lon_entry.GetValue()
+        # lat = self.lat_entry.GetValue()
+        # lon = self.lon_entry.GetValue()
 
         # 调用获取天气信息的函数
-        weather_info = get_weather(lat, lon)
+        #weather_info = get_weather(lat, lon)
+        weather_info = get_weather(location)
 
         # 在界面上显示天气信息
         self.result_label.SetLabel(f"Current weather: {weather_info[0]}, Temperature: {weather_info[1]}°C")
