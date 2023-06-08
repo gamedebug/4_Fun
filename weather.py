@@ -1,15 +1,26 @@
 import requests
 import wx
+from geopy.geocoders import Nominatim
 
-def get_weather(location):
-    #url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
-    url = f"http://api.openweathermap.org/data/2.5/forecast?q={location}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
+def get_coordinates(city_name):
+    geolocator = Nominatim(user_agent="geoapiExercises")
+    location = geolocator.geocode(city_name)
+    if location:
+        latitude = location.latitude
+        longitude = location.longitude
+        return latitude, longitude
+    else:
+        return None
+
+def get_weather(city_name):
+    lat = get_coordinates(city_name)[0]
+    lon = get_coordinates(city_name)[1]
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
     response = requests.get(url)
     data = response.json()
 
     # 获取当前天气信息
-    #current_weather = data["current"]["weather"][0]["description"]
-    current_weather = data["weather"][0]["description"]
+    current_weather = data["current"]["weather"][0]["description"]
     temperature = data["current"]["temp"]
     temperature = round(temperature - 273.15, 2)
 
@@ -59,12 +70,11 @@ class WeatherFrame(wx.Frame):
 
         # 在界面上显示天气信息
         self.result_label.SetLabel(f"Current weather: {weather_info[0]}, Temperature: {weather_info[1]}°C")
-        #self.result_label.Wrap(self.GetSize()[0])  # 自动换行以适应窗口宽度
-        #self.result_label.SetWindowStyle(wx.ALIGN_CENTER_HORIZONTAL)  # 设置文本水平居中
+        self.result_label.Wrap(self.GetSize()[0])  # 自动换行以适应窗口宽度
+        self.result_label.SetWindowStyle(wx.ALIGN_CENTER_HORIZONTAL)  # 设置文本水平居中
 
 if __name__ == "__main__":
     app = wx.App()
     frame = WeatherFrame()
-    #frame.SetSize(width=400, height=300)
     frame.Show()
     app.MainLoop()
