@@ -13,18 +13,20 @@ def get_coordinates(city_name):
         return None
 
 def get_weather(city_name):
-    lat = get_coordinates(city_name)[0]
-    lon = get_coordinates(city_name)[1]
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
-    response = requests.get(url)
-    data = response.json()
+    if get_coordinates(city_name):
+        lat = get_coordinates(city_name)[0]
+        lon = get_coordinates(city_name)[1]
+        url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=b17e74bdfca8d42687a95bc26e0f5f1b"
+        response = requests.get(url)
+        data = response.json()
 
-    # 获取当前天气信息
-    current_weather = data["current"]["weather"][0]["description"]
-    temperature = data["current"]["temp"]
-    temperature = round(temperature - 273.15, 2)
-
-    return current_weather, temperature
+        # 获取当前天气信息
+        current_weather = data["current"]["weather"][0]["description"]
+        temperature = data["current"]["temp"]
+        temperature = round(temperature - 273.15, 2)
+        return current_weather, temperature
+    else:
+        return None
 
 class WeatherFrame(wx.Frame):
     def __init__(self):
@@ -72,6 +74,7 @@ class WeatherFrame(wx.Frame):
         self.result_label.SetLabel(f"Current weather: {weather_info[0]}, Temperature: {weather_info[1]}°C")
         self.result_label.Wrap(self.GetSize()[0])  # 自动换行以适应窗口宽度
         self.result_label.SetWindowStyle(wx.ALIGN_CENTER_HORIZONTAL)  # 设置文本水平居中
+
 
 if __name__ == "__main__":
     app = wx.App()
