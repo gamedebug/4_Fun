@@ -1,0 +1,6 @@
+list = input()
+twister = list.lower().split()
+twister_1 = sorted(twister, reverse=False)
+twister_2 = sorted(twister, reverse=True)
+print(twister_1)
+print(twister_2)
