@@ -1,0 +1,19 @@
+bodies:
+  - mass: 1.0
+    position: [-1, 0, 0]
+    velocity: [0, 0.3, 0.2]
+  - mass: 1.0
+    position: [1, 0, 0]
+    velocity: [0, -0.3, -0.2]
+  - mass: 1.0
+    position: [0, 1, 0]
+    velocity: [0, 0, 0]
+
+simulation:
+  t_start: 0
+  t_end: 50
+  steps: 3000
+
+output:
+  save_animation: true
+  filename: nbody_simulation.mp4
