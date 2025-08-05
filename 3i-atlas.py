@@ -6,7 +6,7 @@ import pandas as pd
 obj = Horizons(
     id='C/2025 N1',
     location='500@10',  # 太阳系质心
-    epochs={'start': '2025-07-01', 'stop': '2025-11-01', 'step': '1d'},
+    epochs={'start': '2025-07-01', 'stop': '2025-08-05', 'step': '1d'},
     id_type='smallbody'  # 明确是小天体
 )
 # 获取状态向量
